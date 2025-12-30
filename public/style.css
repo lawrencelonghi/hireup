@@ -11,6 +11,8 @@ html {
   padding: 0;
 }
 
+
+
 html,
 body {
   width: 100%;
@@ -65,4 +67,28 @@ body {
 
 .roll-container h1 {
   display: block;
+}
+
+@keyframes slide-menu {
+  0% {
+    transform: translateX(-100%);
+  }
+
+  100% {
+    transform: translateX(0);
+  }
+}
+
+.slide-menu {
+  animation: slide-menu 0.5s ease-in forwards;
+}
+
+/* bolinhas da pagina 'em construcao' animadas */
+
+@keyframes pulse-slow {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
+.pulse-slow {
+    animation: pulse-slow 2s ease-in-out infinite;
 }
