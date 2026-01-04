@@ -1,0 +1,47 @@
+# Environment files
+.env
+.env.dev
+.env.prod
+.env.local
+
+# Air temporary files
+tmp/
+*.log
+build-errors.log
+
+# Go
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+*.test
+*.out
+go.work
+
+# Binaries
+/main
+/app
+
+# Database backups
+backups/*.sql
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Docker volumes data (if mounted locally)
+postgres_data/
+redis_data/
+
+# SSL certificates (if extracted locally)
+*.pem
+*.crt
+*.key
