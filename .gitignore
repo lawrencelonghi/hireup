@@ -47,4 +47,5 @@ redis_data/
 *.key
 
 
-/public/node_modules/
+/node_modules/
+/public/dist/
