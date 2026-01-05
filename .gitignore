@@ -45,3 +45,6 @@ redis_data/
 *.pem
 *.crt
 *.key
+
+
+/public/node_modules/
