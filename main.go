@@ -26,6 +26,7 @@ func main() {
 		})
 	})
 
+
   router.GET("/", func(c *gin.Context) {
 		c.HTML(http.StatusOK, "construction.html", gin.H{
 			"title": "Home",
