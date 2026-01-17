@@ -6,7 +6,9 @@ services:
       - "80:80"
       - "443:443"
     environment:
-      DOMAINS: '${DOMAIN} -> http://app:8080'
+      DOMAINS: >
+        ${DOMAIN} -> http://app:8080,
+        www.${DOMAIN} -> http://app:8080
       STAGE: ${HTTPS_PORTAL_STAGE:-production}
       # STAGE options: local, staging, production
       # local: no SSL
