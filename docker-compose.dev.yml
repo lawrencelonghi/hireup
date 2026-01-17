@@ -19,7 +19,7 @@ services:
       redis:
         condition: service_started
       tailwind:
-        condition: service_completed_successfully
+        condition: service_started
     networks:
       - app-network
     restart: unless-stopped
