@@ -67,6 +67,8 @@ services:
       context: .
       dockerfile: tailwind.dockerfile
     container_name: tailwind-dev
+    tty: true
+    stdin_open: true
     volumes:
       - ./:/tw
     command: bash -c "npm install && npm run dev"
