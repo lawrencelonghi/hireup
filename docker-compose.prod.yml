@@ -29,20 +29,32 @@ services:
         max-size: "10m"
         max-file: "3"
 
+
+  builder:
+    build:
+      context: .
+      target: prod
+    container_name: gin-server-builder
+    env_file: ./.env
+    volumes:
+      - go-modules:/go/pkg/mod
+      - app_root:/app
+    command: bash -c "CGO_ENABLED=0 GOOS=linux go build -v -o /app/main -ldflags=\"-w -s\""
+    restart: no
+
+
   app:
     build:
       context: .
-      target: production
+      target: prod
     container_name: gin-server-prod
     expose:
       - "8080"
     env_file: ./.env
     volumes:
-      # Mount source code for hot reload
-      - .:/app
       - go-modules:/go/pkg/mod
-      # Exclude tmp directory to prevent permission issues
-      - /app/tmp
+      - app_root:/app
+    command: bash -c "/app/main"
     depends_on:
       postgres:
         condition: service_healthy
@@ -50,17 +62,11 @@ services:
         condition: service_healthy
       tailwind:
         condition: service_completed_successfully
+      builder:
+        condition: service_completed_successfully
     networks:
       - app-network
     restart: always
-    deploy:
-      resources:
-        limits:
-          cpus: '1'
-          memory: 512M
-        reservations:
-          cpus: '0.5'
-          memory: 256M
     healthcheck:
       test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:8080/health"]
       interval: 30s
@@ -167,4 +173,6 @@ volumes:
   https-portal-data:
     driver: local
   go-modules:
+    driver: local
+  app_root:
     driver: local
