@@ -3,8 +3,6 @@ RUN apk add --no-cache bash
 WORKDIR /tw
 
 COPY package*.json ./
-RUN npm install
+RUN npm install -g tailwindcss @tailwindcss/cli
 
 COPY . .
-
-CMD ["npm", "run", "dev"]
