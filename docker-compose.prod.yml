@@ -36,7 +36,7 @@ services:
     container_name: gin-server-prod
     expose:
       - "8080"
-    env_file: ./.env.prod
+    env_file: ./.env
     depends_on:
       postgres:
         condition: service_healthy
@@ -70,7 +70,7 @@ services:
   postgres:
     image: postgres:15-alpine
     container_name: gin-postgres-prod
-    env_file: ./.env.prod
+    env_file: ./.env
     volumes:
       - postgres_prod_data:/var/lib/postgresql/data
       - ./backups:/backups
