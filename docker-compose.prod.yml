@@ -166,3 +166,5 @@ volumes:
     driver: local
   https-portal-data:
     driver: local
+  go-modules:
+    driver: local
