@@ -42,6 +42,8 @@ services:
         condition: service_healthy
       redis:
         condition: service_healthy
+      tailwind:
+        condition: service_completed_successfully
     networks:
       - app-network
     restart: always
@@ -134,9 +136,22 @@ services:
         max-file: "3"
     command: redis-server --appendonly yes --requirepass ${REDIS_PASSWORD}
 
+
+  tailwind:
+    build:
+      context: .
+      dockerfile: tailwind.dockerfile
+    container_name: tailwind
+    volumes:
+      - ./:/tw
+    command: bash -c "npm install && npm run build"
+    restart: no
+
+
 networks:
   app-network:
     driver: bridge
+
 
 volumes:
   postgres_prod_data:
