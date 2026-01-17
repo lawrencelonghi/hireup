@@ -37,6 +37,12 @@ services:
     expose:
       - "8080"
     env_file: ./.env
+    volumes:
+      # Mount source code for hot reload
+      - .:/app
+      - go-modules:/go/pkg/mod
+      # Exclude tmp directory to prevent permission issues
+      - /app/tmp
     depends_on:
       postgres:
         condition: service_healthy
